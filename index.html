@@ -1,0 +1,108 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<style>
+body{
+	font-family: "Roboto", sans-serif
+	margin: 0
+	min-height: 450px
+	height: 100vh
+	display: flex
+	justify-content: center
+	align-items: center
+	background-color: #E5C38B
+}	
+.clock{
+	width: 350px
+	height: 350px
+	border-radius: 50%
+	background-color: #6DB7C1
+	border: 35px #0E475A solid
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.8)
+	position: relative
+}
+.hand{
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -100%)
+		transform-origin: center bottom
+		border-radius: 40px
+}
+.s-hand{
+		height: 155px
+		width: 5px
+		background-color: #D85534
+		z-index: 5
+	}
+	.m-hand{
+		height: 135px
+		width: 10px
+		background-color: #027C91
+		z-index: 4
+		}
+	.h-hand{
+		height: 100px
+		width: 14px
+		background-color:  #0E475A
+		z-index: 3
+		}
+	.center{
+		background-color: #D85534
+		width: 20px
+		height: 20px
+		border-radius: 50%
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		z-index: 6
+}
+		
+	
+<style>
+
+<script>
+$(document).ready(function() {
+	
+	setInterval(function(){
+		getTime();
+	}, 50);
+	
+	function getTime() {
+		var d = new Date();
+		
+		var s = d.getSeconds() + (d.getMilliseconds()/1000);
+		var m = d.getMinutes();
+		var h = hour12();
+		
+		$(".s-hand").css("transform", "translate(-50%, -100%) rotate(" + s*6 + "deg)");
+		$(".m-hand").css("transform", "translate(-50%, -100%) rotate(" + m*6 + "deg)");
+		$(".h-hand").css("transform", "translate(-50%, -100%) rotate(" + (h*30 + m*0.5) + "deg)");
+		
+		function hour12() {
+			var hour = d.getHours();
+
+			if(hour >= 12) {
+				hour = hour-12;
+			}
+
+			if(hour == 0) {
+				h = 12;
+			}
+			return hour;
+		}
+	}
+});
+</script>
+</head>
+
+<body>
+<div class="clock">
+	<div class="s-hand hand"></div>
+	<div class="m-hand hand"></div>
+	<div class="h-hand hand"></div>
+	<div class="center"></div>
+</div>
+</body>
+</html>
